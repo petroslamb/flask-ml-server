@@ -16,10 +16,12 @@ class ModelServer(Resource):
     @tf_api.marshal_with(tf_response_model, envelope='ModelPrediction')
     def post(self):
         """Send a title up to 20 words and retrieve the Sentence Embedding"""
+        model = current_app.model_server.models['bow_spanish']
+
+
         return {'tokenizedTitle': ['the', 'some'], 'modelName': 'spanish bow', 'modelPrediction': [-1.1, 2.2]}
 
     @marshal_with_field(fields.String)
     def get(self):
         """A simple health check on the model"""
-        current_app.logger.info("helloooo")
         return 'The model is operational'

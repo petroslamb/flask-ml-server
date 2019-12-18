@@ -11,7 +11,12 @@ class Config:
     DEBUG = os.getenv('DEBUG', False)
     LOG_FILE = os.getenv('LOG_FILE', 'api.log')
     LOG_LEVEL = os.getenv('LOG_LEVEL', logging.INFO)
-    MODELS_DIR = os.getenv('MODELS_DIR', '../tf_models')
+    MODELS_BASE_DIR = os.getenv('MODELS_BASE_DIR', '../tf_models')
+    MODEL_NAMES = os.getenv('MODEL_NAMES', 'bow_spanish,lstm_multilingual')
+    MODEL_FILES = os.getenv(
+        'MODEL_FILES',
+        'tensorflow_model,net_config.json,tensorflow_model.meta,word_mapping.json'
+    )
     CONSOLE_LOG = os.getenv('CONSOLE_LOG', True)
 
 

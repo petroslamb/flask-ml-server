@@ -5,6 +5,7 @@ from flask import Flask
 from flask.logging import default_handler
 
 from src.config import config_by_name
+from src.backend.model_service import ModelServer
 
 
 def configure_logging(app):
@@ -39,5 +40,7 @@ def create_app(script_info=None):
     from src.api.blueprint import api_blueprint
     app.register_blueprint(api_blueprint, url_prefix='/api/v1')
     app.logger.info("API initialized")
+
+    app.model_server = ModelServer()
     
     return app

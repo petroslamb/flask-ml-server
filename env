@@ -1,3 +1,7 @@
+
+# Example env file.
+# Please rename it to .env, if you want for dotenv to pick it up automatically.
+
 FLASK_APP="Sentence Embeddings Server"
 FLASK_ENV="production"
 FLASK_DEBUG=0
