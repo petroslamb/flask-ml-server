@@ -7,15 +7,18 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     FLASK_APP = os.getenv("FLASK_APP", "Sentence Embeddings Server")
     SECRET_KEY = os.getenv('SECRET_KEY', 'my_precious_secret_key')
-    FLASK_ENV = os.getenv('FLASK_ENV', 'custom')
+    FLASK_ENV = os.getenv('FLASK_ENV', 'env_name')
     DEBUG = os.getenv('DEBUG', False)
     LOG_FILE = os.getenv('LOG_FILE', 'api.log')
     LOG_LEVEL = os.getenv('LOG_LEVEL', logging.INFO)
     MODELS_BASE_DIR = os.getenv('MODELS_BASE_DIR', '../tf_models')
-    MODEL_NAMES = os.getenv('MODEL_NAMES', 'bow_spanish,lstm_multilingual')
+    MODEL_NAMES = os.getenv(
+        'MODEL_NAMES', 'bow-spanish,lstm-multilingual'
+    )
     MODEL_FILES = os.getenv(
         'MODEL_FILES',
-        'tensorflow_model,net_config.json,tensorflow_model.meta,word_mapping.json'
+        'tensorflow_model,net_config.json,'
+        'tensorflow_model.meta,word_mapping.json'
     )
     CONSOLE_LOG = os.getenv('CONSOLE_LOG', True)
 
@@ -41,7 +44,6 @@ class ProductionConfig(Config):
     
 
 config_by_name = dict(
-    custom=Config,
     development=DevelopmentConfig,
     testing=TestingConfig,
     production=ProductionConfig
