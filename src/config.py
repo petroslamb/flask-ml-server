@@ -9,6 +9,8 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'my_precious_secret_key')
     FLASK_ENV = os.getenv('FLASK_ENV', 'custom_env')
     DEBUG = os.getenv('DEBUG', False)
+    # Disabled by default, very experimental
+    OOV_TOKEN = os.getenv('OOV_TOKEN', None)
     LOG_FILE = os.getenv('LOG_FILE', 'api.log')
     LOG_LEVEL = os.getenv('LOG_LEVEL', logging.INFO)
     MODELS_BASE_DIR = os.getenv('MODELS_BASE_DIR', '../tf_models')

@@ -13,6 +13,7 @@ Included is, but not limited to:
 - Supports multiple models, controls enabled ones from configuration.
 - Checks, validates and serves only correct models.
 - Works even if some of the models fail at runtime.
+- Option for `Out Of Vocabulary` support.
 - Supports both v1, v2 versions of `Tensorflow` models , 
 by using `Tensorflow 2.0` and running `v1` models with `tf.compat.v1`.
 - Full support for `dev, test, prod` environments.
@@ -94,6 +95,7 @@ Below is a list of most the configuration options:
    'DEBUG', False
    'LOG_FILE', 'api.log'
    'LOG_LEVEL', logging.INFO
+   'OOV_TOKEN', None
    'MODELS_BASE_DIR', '../tf_models'
    'MODEL_NAMES', 'bow-spanish,lstm-multilingual'
    'MODEL_FILES', 'tensorflow_model,net_config.json,tensorflow_model.meta,word_mapping.json'
@@ -201,6 +203,24 @@ The following list was not implemented, for lack of time.
 
 Answers to Bonus Questions.
 
+### Bonus Feature: Experimental OOV support
+
+It was found that the `word_mapping.json` in the `bow-spanish` model contained the word `OOV`.
+This suggested that the model supports `out of vocabulary` tokens.
+As such it is possible to turn on OOV support by setting `OOV_TOKEN=OOV` in the environment.
+
+This functionality has not been tested and is implemented for showcasing in `src/backend/processors:SimpleProcessorWithOOVSupport`.
+
+### Feature: Tokenization with Gensim
+
+I was found that in `word_mapping.json` there were tokens for several punctuation characters, spaces etc.
+This opens up a discussion for elaborate tokenization, where these marks are kept as tokens for the model to use.
+
+- As this was recognized, there was no time for such an imlementation, so a simpler tokenizer was used.
+- Simple tokenizer was provided by `Gensim`, which lower-cases words and removes punctuation.
+- It is possible to use subclassing at `src/backend/processors` and switch this in the future.
+- For a better tokenizer with multi-language and common-phrase support take a look at Spacy (https://spacy.io/)
+
 ### High Availability Setup
 
 - Use multiple instances behind a load balancer.
@@ -223,9 +243,9 @@ https://uwsgi-docs.readthedocs.io/en/latest/Emperor.html
 
 The word is probably caching. There are three levels to be considered:
 
-- At the web proxy (nginx) level, to send identical responses to identical requests
-- In memory of the Flask application, keep a list of requested titles/docs and their responses
-- With a separate caching server like Redis (https://redis.io/), to keep a list of requested titles/docs and their responses
+- At the web proxy (nginx) level, to send identical responses to identical requests.
+- In memory of the Flask application, keep a list of requested tokenized docs and their responses.
+- With a separate caching server like Redis (https://redis.io/), to keep a list of requested tokenized docs and their responses.
 
 ### Server resource depletion
 
