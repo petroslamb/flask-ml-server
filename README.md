@@ -1,26 +1,28 @@
 # Simple TF model Service
 
-A, hopefully organized Flask powered Web REST API, to serve Tensorflow models.
-Written in a hurry!
+A, (hopefully) organized Flask powered Web REST API, to serve Tensorflow models.
 
-- Please excuse the typos!
+Written in a hurry!
 
 #### Features
 
-Included, but not limited to:
+The service tries to showcase production level organization, code and features. 
 
-- Tries to showcase production level organization, code and features.
+Included is, but not limited to:
+
 - Supports multiple models, controls enabled ones from configuration.
 - Checks, validates and serves only correct models.
 - Works even if some of the models fail at runtime.
+- Supports both v1, v2 versions of `Tensorflow` models , 
+by using `Tensorflow 2.0` and running `v1` models with `tf.compat.v1`.
 - Full support for `dev, test, prod` environments.
 - Extended configuration, via environment variables.
 - Environment files can be used as well.
-- Logging support for file and console.
+- Logging support for file and console logs.
 - Tries for well organized code.
 - Tries for production level logging and error handling
 - Swagger.
-- Supports both versions of `Tensorflow (TFv1, TFv2)`, by using `v2` and `tf.compat.v1`.
+
 
 #### Limitations
 
@@ -99,10 +101,10 @@ To run with your created `.env`, use installed CLI:
 
 `my-server-manage run`
 
-Access at `localhost:5000/api/v1` by default.
-
+- Access at `localhost:5000/api/v1` by default.
 - If not `.env` file is present, defaults will be overriden by env vars.
 - It is strogly recommended to use an env file, as testing was done with one.
+- Use `FLASK_ENV=testing`, for better results.
 
 ## Tests
 
