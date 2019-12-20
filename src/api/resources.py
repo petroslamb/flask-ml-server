@@ -64,7 +64,7 @@ class ModelServer(Resource):
         """A simple health check on the model"""
         model_names = src.services.model_service.operational_models.keys()
         if model_name not in model_names:
-            abort(404, 'Model not available, try one of {}'.format(
+            abort(404, 'Model not available, try one of: {}'.format(
                 ", ".join(model_names)
             ))
         return 'Model is operational: {}'.format(model_name)

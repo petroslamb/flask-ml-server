@@ -1,0 +1,6 @@
+include requirements.txt
+include frozen_requirements.txt
+include env
+include README.md
+global-exclude *.pyc
+global-exclude *.log

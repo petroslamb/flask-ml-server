@@ -15,7 +15,6 @@ class TestModels(TestCaseBase):
         with self.client:
             response = post_to_bow_spanish(self, dict(title='Arriba, abajo lento lento!'))
             self.assert_200(response)
-            print(response)
             data = json.loads(response.data.decode())
             self.assertListEqual(
                 data['ModelPrediction']['tokenizedTitle'],

@@ -5,3 +5,5 @@
 FLASK_APP="Sentence Embeddings Server"
 FLASK_ENV="production"
 FLASK_DEBUG=0
+MODELS_BASE_DIR="/home/user/tf_models/"
+MODEL_NAMES="bow-spanish,lstm-multilingual"
