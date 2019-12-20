@@ -77,6 +77,8 @@ To run with your created `.env`, use installed CLI:
 
 `my-server-manage run`
 
+Access at `localhost:5000/api/v1` by default.
+
 - If not `.env` file is present, defaults will be overriden by env vars.
 - It is strogly recommended to use an env file, as testing was done with one.
 
@@ -163,23 +165,44 @@ Solution is to downgrade tensorflow to v1.
 The following list was not implemented, for lack of time.
 
 - Second model to be introduced (`lstm-multilingual`)
-- More integration tests
-- Unit testing
-- Doc strings
-- Use private functions, members and properties in classes
+- More integration tests.
+- Unit testing.
+- Doc strings.
+- Use private functions, members and properties in classes.
+- Possible typos, as because of haste.
 
-# Extra Documentation
+## Extra Documentation
 
-## High Availability Setup
+### High Availability Setup
 
-## Independent model loading
+- Use multiple servers behind a load balancer
+- Use a WSGI server like Emperor for multiple workers
 
-## Logging functionality
+### Independent model loading
 
-## Swagger support
+- Implemented
 
-## Repetitive requests
+### Logging functionality
 
-## Server resource depletion
+- Implemented
 
-## Security concerns
+### Swagger support
+
+- Implemented
+
+### Repetitive requests with big model computation
+
+The word is probably caching. There are three levels to be considered:
+
+- At the web proxy (nginx) level, to send identical responses to identical requests
+- In memory of the Flask application, keep a list of requested titles/docs and their responses
+- With separate caching server like Redis, to keep a list of requested titles/docs and their responses
+
+### Server resource depletion
+
+- Again multiple servers on different machines, behind a load balancer
+
+### Security concerns
+
+- Might help to implement security tokens for access.
+- Throttling for DOS attacks.
