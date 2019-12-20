@@ -15,9 +15,7 @@ setup(
         'Flask',
         'Flask-Restplus',
         'tensorflow',
-        'gensim'
-    ],
-    tests_require = [
+        'gensim',
         'Flask-Testing',
         'coverage',
         'flake8'

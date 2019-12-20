@@ -6,8 +6,7 @@
 
 *.log
 
-flask_ml_server.egg-info/
-flask_ml_server.egg-info/*
+.coverage/
 
 # Distribution / packaging
 .Python
