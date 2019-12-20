@@ -1,6 +1,6 @@
 # Simple TF model Service
 
-A, (hopefully) organized Flask powered Web REST API, to serve Tensorflow models.
+A (hopefully) organized Flask powered Web REST API, to serve Tensorflow models.
 
 Written in a hurry!
 
@@ -26,7 +26,7 @@ by using `Tensorflow 2.0` and running `v1` models with `tf.compat.v1`.
 
 #### Limitations
 
-Some things are not perfect:
+Things are far from perfect:
 
 - Due to time constraint, the model only supports the `bow-spanish` model.
 - No support for a production WSGI server, due to time constraint.
