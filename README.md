@@ -54,6 +54,26 @@ Both model directories should be located under a base directory.
 
 ## Usage
 
+### Env files usage
+
+Edit `env` file to create a `.env` file, if you like to use it.
+
+- Make sure to pinpoint to your models directory.
+
+### Run the server
+
+To run with a different env file use `dotenv`:
+
+`dotenv -f .env_dev run python scripts/manage.py run`
+
+To run with your created `.env`, use installed CLI:
+
+`my-server-manage run`
+
+- Access at `localhost:5000/api/v1` by default.
+- If not `.env` file is present, defaults will be overriden by env vars.
+- It is strogly recommended to use an env file, as testing was done with one.
+- Use `FLASK_ENV=testing`, for better results.
 
 ### Configuration options
 
@@ -84,27 +104,6 @@ Below is a list of most the configuration options:
 - Changing the `env_name` to `development`, `testing` or `production`,
 will override certain options for safety or ease of use.
 
-
-### Env files usage
-
-Edit `env` file to create a `.env` file, if you like to use it.
-
-- Make sure to pinpoint to your models directory.
-
-### Run the server
-
-To run with a different env file use `dotenv`:
-
-`dotenv -f .env_dev run python scripts/manage.py run`
-
-To run with your created `.env`, use installed CLI:
-
-`my-server-manage run`
-
-- Access at `localhost:5000/api/v1` by default.
-- If not `.env` file is present, defaults will be overriden by env vars.
-- It is strogly recommended to use an env file, as testing was done with one.
-- Use `FLASK_ENV=testing`, for better results.
 
 ## Tests
 
