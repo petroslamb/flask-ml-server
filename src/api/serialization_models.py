@@ -8,13 +8,13 @@ class TensorflowModels:
     parser = reqparse.RequestParser()
     parser.add_argument(
         'title', type=str, required=True,
-        help='A sentence for which we want the Sentence Embedding.'
-             'Truncated down to 20 words for bow-spanish model.'
+        help='A sentence for which we want the Sentence Embedding. '
+             'Truncated down to 20 words for the bow-spanish model.'
     )
     parser.add_argument(
         'length', type=int, required=False, default=20,
-        help='The length of the input sentence in words.'
-             'Truncated down to 20 words for bow-spanish model.'
+        help='The length of the input sentence in words. '
+             'Truncated down to 20 words for the bow-spanish model.'
     )
     parser.add_argument(
         'title_dropout', type=float, required=False, default=1.0,

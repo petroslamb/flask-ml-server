@@ -10,14 +10,16 @@ tf_response_model = TensorflowModels.response_model
 
 
 @tf_api.route('/<string:model_name>/predict')
-@tf_api.param('model_name', 'The tf model to use')
+@tf_api.param(
+    'model_name', 'The tf model to use, '
+    'try one of: bow-spanish, lstm-multiligual')
 class ModelServer(Resource):
     """Serves a prediction from a selected model"""
 
     @tf_api.expect(tf_request_parser)
     @tf_api.marshal_with(tf_response_model, envelope='ModelPrediction')
     def post(self, model_name):
-        """Send a title up to 20 words and retrieve the Sentence Embedding"""
+        """Send a title, sentence or short text, retrieve the Doc Embedding"""
 
         model_names = src.services.model_service.operational_models.keys()
         if model_name not in model_names:
@@ -61,7 +63,10 @@ class ModelServer(Resource):
 
     @marshal_with_field(fields.String)
     def get(self, model_name):
-        """A simple health check on the model"""
+        """
+        A simple health check on the model,
+        try one of: bow-spanish, lstm-multiligual
+        """
         model_names = src.services.model_service.operational_models.keys()
         if model_name not in model_names:
             abort(404, 'Model not available, try one of: {}'.format(
