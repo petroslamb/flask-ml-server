@@ -1,25 +1,39 @@
 # Simple TF model Service
 
-A well organized Flask powered Web REST API, to serve Tensorflow models.
+A, hopefully organized Flask powered Web REST API, to serve Tensorflow models.
+Written in a hurry!
+
+- Please excuse the typos!
 
 #### Features
 
+Included, but not limited to:
+
+- Tries to showcase production level organization, code and features.
 - Supports multiple models, controls enabled ones from configuration.
 - Checks, validates and serves only correct models.
 - Works even if some of the models fail at runtime.
 - Full support for `dev, test, prod` environments.
 - Extended configuration, via environment variables.
 - Environment files can be used as well.
-- Well organized code.
-- Logging and error handling
+- Logging support for file and console.
+- Tries for well organized code.
+- Tries for production level logging and error handling
 - Swagger.
+- Supports both versions of `Tensorflow (TFv1, TFv2)`, by using `v2` and `tf.compat.v1`.
 
 #### Limitations
 
+Some things are not perfect:
+
 - Due to time constraint, the model only supports the `bow-spanish` model.
-- `TFv2` has been used, although the models were loaded by using compatibility mode with `v1`.
+- No support for a production WSGI server, due to time constraint.
+- `TFv2` has been used as there was no suggestion for the model version, but this introduced a bug.
+- Finally the models were found to be of `v1` and loaded by using compatibility mode with `v1`.
 - Enpoints were not implemented exactly as requested, but in a fashion that is similar.
 - Limited documentation and testing.
+- Has many rough edges and unifished details as was written in a haste (~5days).
+- There is known bug, in `development` mode.
 
 ## Installation
 
@@ -41,6 +55,13 @@ Both model directories should be located under a base directory.
 
 ### Configuration options
 
+There are three operational modes:
+
+- `development` with debugger, autoreload and console logs on at DEBUG level.
+- `testing` with file log and console log, with logs at INFO level, no debugger, but flask testing on.
+- `production` only file log, logs at WARNING level.
+
+**ATTENTION:** `develompent` mode breaks with a known bug, description is in a relevant section of the Readme.
 
 Below is a list of most the configuration options:
 
@@ -60,6 +81,7 @@ Below is a list of most the configuration options:
 - Most can be changed via env vars.
 - Changing the `env_name` to `development`, `testing` or `production`,
 will override certain options for safety or ease of use.
+
 
 ### Env files usage
 
@@ -147,7 +169,7 @@ Run `flake8` to keep project linted.
 
 ## Known Bugs
 
-Bug appens when DEBUG mode is enabled.
+Bug appears during startup in `development` mode,  when the debugger mode is enabled.
 
 ```
 ModuleNotFoundError: No module named 'tensorflow_core.keras' in Flask #34607
@@ -160,35 +182,41 @@ https://github.com/tensorflow/tensorflow/issues/34607
 
 Solution is to downgrade tensorflow to v1.
 
-## Improvements
+## Future Improvements
 
 The following list was not implemented, for lack of time.
 
-- Second model to be introduced (`lstm-multilingual`)
+- Fix known bug, as trying for `TF2` is not a good idea yet.
+- Second model to be introduced (`lstm-multilingual`).
+- Support for production level WSGI server, like Gunicorn. https://gunicorn.org/
 - More integration tests.
 - Unit testing.
 - Doc strings.
 - Use private functions, members and properties in classes.
-- Possible typos, as because of haste.
+- General code cleanup and finish on TODO's.
+- Fix many typos, and missing details,  because of haste.
 
 ## Extra Documentation
 
+Answers to Bonus Questions.
+
 ### High Availability Setup
 
-- Use multiple servers behind a load balancer
-- Use a WSGI server like Emperor for multiple workers
+- Use multiple instances behind a load balancer.
+- Use a multi-app deployment WSGI server like uWSGI Emperor for multiple worker support.
+https://uwsgi-docs.readthedocs.io/en/latest/Emperor.html
 
 ### Independent model loading
 
-- Implemented
+- Implemented, independence both at startup and runtime errors.
 
 ### Logging functionality
 
-- Implemented
+- Implemented, both file and console, with adjusted levels according to environment.
 
 ### Swagger support
 
-- Implemented
+- Implemented, tries for friendly messages.
 
 ### Repetitive requests with big model computation
 
@@ -196,13 +224,14 @@ The word is probably caching. There are three levels to be considered:
 
 - At the web proxy (nginx) level, to send identical responses to identical requests
 - In memory of the Flask application, keep a list of requested titles/docs and their responses
-- With separate caching server like Redis, to keep a list of requested titles/docs and their responses
+- With a separate caching server like Redis (https://redis.io/), to keep a list of requested titles/docs and their responses
 
 ### Server resource depletion
 
-- Again multiple servers on different machines, behind a load balancer
+- Again multiple servers, but on different machines, behind a load balancer.
 
 ### Security concerns
 
 - Might help to implement security tokens for access.
 - Throttling for DOS attacks.
+- Production level WSGI server
