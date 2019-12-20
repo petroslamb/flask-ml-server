@@ -14,19 +14,25 @@ class EnvironmentValidator:
 
     def validate_environment(self):
         if not self.models_base_path:
-            src.services.app_logger.error('No models base directory found in configuration')
+            src.services.app_logger.error(
+                'No models base directory found in configuration'
+            )
             raise EnvironmentError('No models base directory')
 
         if self.model_names:
             self.model_names = self.model_names.split(',')
         else:
-            src.services.app_logger.error('No model names found in configuration')
+            src.services.app_logger.error(
+                'No model names found in configuration'
+            )
             raise EnvironmentError('No model names')
 
         if self.model_file_names:
             self.model_file_names = self.model_file_names.split(',')
         else:
-            src.services.app_logger.error('No model file names found in configuration')
+            src.services.app_logger.error(
+                'No model file names found in configuration'
+            )
             raise EnvironmentError('No model file names')
 
 
@@ -92,9 +98,9 @@ class PathValidator:
 
     @staticmethod
     def check_dirpath(path):
-            if path.exists() and path.is_dir():
-                return True
-            return False
+        if path.exists() and path.is_dir():
+            return True
+        return False
 
     @staticmethod
     def check_filepath(path):

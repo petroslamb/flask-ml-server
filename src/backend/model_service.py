@@ -37,7 +37,7 @@ class ModelService:
         return operational_models
 
     def get_enabled_model_classes(self, enabled_model_names):
-       return [
+        return [
             model_class for model_class in available_model_classes
             if model_class.name in enabled_model_names
         ]

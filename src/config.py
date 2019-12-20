@@ -32,7 +32,7 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     FLASK_ENV = 'testing'
-    DEBUG = True
+    DEBUG = False
     TESTING = True
     PRESERVE_CONTEXT_ON_EXCEPTION = False
 
@@ -41,7 +41,7 @@ class ProductionConfig(Config):
     FLASK_ENV = 'production'
     DEBUG = False
     CONSOLE_LOG = False
-    
+
 
 config_by_name = dict(
     development=DevelopmentConfig,

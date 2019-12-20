@@ -1,4 +1,4 @@
-from flask import abort, jsonify
+from flask import abort
 from flask_restplus import Resource, marshal_with_field, fields
 
 import src.services

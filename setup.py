@@ -20,7 +20,7 @@ setup(
         'coverage',
         'flake8'
     ],
-    entry_points = {
+    entry_points={
         'console_scripts': [
             'my-server-manage = scripts.manage:cli'
         ]

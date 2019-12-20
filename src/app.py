@@ -1,6 +1,6 @@
 import os
 import copy
-from logging.handlers import RotatingFileHandler
+from logging import FileHandler
 
 from flask import Flask
 from flask.logging import default_handler
@@ -8,7 +8,7 @@ from flask.logging import default_handler
 
 def configure_logging(app):
     if app.config['LOG_FILE']:
-        file_handler = RotatingFileHandler(app.config['LOG_FILE'], maxBytes=10000, backupCount=1)
+        file_handler = FileHandler(app.config['LOG_FILE'])
         file_handler.formatter = default_handler.formatter
         file_handler.setLevel(app.config['LOG_LEVEL'])
         app.logger.addHandler(file_handler)
@@ -19,7 +19,6 @@ def configure_logging(app):
 
 
 def create_app(script_info=None):
-    
     # Instantiate the app
     app = Flask(__name__,)
 

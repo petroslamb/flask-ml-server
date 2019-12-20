@@ -1,5 +1,4 @@
 FLASK_APP="Sentence Embeddings Server"
 FLASK_ENV="testing"
-FLASK_DEBUG=1
-MODELS_BASE_DIR="/home/pet/deeplab/"
+MODELS_BASE_DIR="../data"
 MODEL_NAMES="bow-spanish"

@@ -1,6 +1,7 @@
 import json
 from tests.integration.common import TestCaseBase
 
+
 def post_to_bow_spanish(self, payload):
     return self.client.post(
         '/api/v1/model/bow-spanish/predict',
@@ -13,7 +14,9 @@ class TestModels(TestCaseBase):
 
     def test_post_valid_text_to_bow_spanish(self):
         with self.client:
-            response = post_to_bow_spanish(self, dict(title='Arriba, abajo lento lento!'))
+            response = post_to_bow_spanish(
+                self, dict(title='Arriba, abajo lento lento!')
+            )
             self.assert_200(response)
             data = json.loads(response.data.decode())
             self.assertListEqual(
